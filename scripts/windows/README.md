@@ -45,7 +45,7 @@ Invoke-WebRequest `
   -OutFile ".\PS-PrepToolbox.ps1"
 ```
 
-================
+--------------------------------------------------------------------------------------------------------------------------
 
 ## PS-PrepToolbox.ps1
 
@@ -195,6 +195,65 @@ powershell -ExecutionPolicy Bypass -File .\PS-GetNetworkInfo.ps1 `
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\PS-GetNetworkInfo.ps1 `
   -TestTargets "8.8.8.8","1.1.1.1","github.com"
+```
+
+--------------------------------------------------------------------------------------------------------------------------
+
+## PS-GetSoftwareOKTools.ps1
+
+Convenience downloader for a handful of **excellent freeware tools** by  
+**Nenad Hrg / [SoftwareOK.com](https://www.softwareok.com/)**.
+
+This script:
+
+- Uses `C:\jb` as the overall work area
+- Downloads ZIPs into `C:\jb\softwareok` by default
+- Always pulls **directly from the official SoftwareOK download URLs**
+- Never modifies the downloaded ZIPs
+- Lets you grab specific tools or the whole set in one go
+
+All credit for these utilities goes to **Nenad Hrg / SoftwareOK**.  
+If you find them useful, please consider supporting the original author via the
+donation links on SoftwareOK.
+
+### Supported tools (keys)
+
+- `DeleteOnReboot` – Delete.On.Reboot
+- `DesktopNoteOKInstaller` / `DesktopNoteOKPortable`
+- `ThisIsMyFile`
+- `DirPrintOKInstaller` / `DirPrintOKPortable`
+- `DontSleep` / `DontSleepPortable`
+- `QDirInstaller` / `QDirPortable`
+
+### Download the script
+
+```powershell
+Invoke-WebRequest `
+  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-GetSoftwareOKTools.ps1" `
+  -OutFile ".\PS-GetSoftwareOKTools.ps1"
+```
+
+### Usage examples
+
+- Download everything into the default destination (C:\jb\softwareok):
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\PS-GetSoftwareOKTools.ps1 -All
+```
+
+- Download just a couple of tools:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\PS-GetSoftwareOKTools.ps1 `
+  -Name QDirPortable, DeleteOnReboot
+```
+
+- Use a custom destination directory:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\PS-GetSoftwareOKTools.ps1 `
+  -All `
+  -Destination "D:\Tools\SoftwareOK"
 ```
 
 --------------------------------------------------------------------------------------------------------------------------
