@@ -5,6 +5,7 @@
 .DESCRIPTION
   Generates a text report with adapter details, IP configuration,
   DNS servers, routes, ARP table, and basic connectivity tests.
+  By default, writes the report under C:\jb.
 
 .REPO
   https://github.com/JBOrunon/toolbox
@@ -12,8 +13,14 @@
 
 [CmdletBinding()]
 param(
+    # Optional: explicit output file path.
+    # If not provided, a file is created under the working directory (default C:\jb).
     [string]$OutputPath,
 
+    # Optional: working directory root. Default is C:\jb.
+    [string]$WorkingDirectory = "C:\jb",
+
+    # Connectivity test targets
     [string[]]$TestTargets = @(
         "1.1.1.1",      # Cloudflare DNS
         "8.8.8.8",      # Google DNS
@@ -21,11 +28,38 @@ param(
     )
 )
 
-# If no output path is specified, write to the current directory
+# --- Determine output path and ensure directories exist ---
 if (-not $OutputPath) {
+    if (-not $WorkingDirectory) {
+        $WorkingDirectory = "C:\jb"
+    }
+
+    try {
+        if (-not (Test-Path -LiteralPath $WorkingDirectory)) {
+            New-Item -ItemType Directory -Path $WorkingDirectory -Force | Out-Null
+        }
+    }
+    catch {
+        Write-Host "ERROR: Failed to prepare working directory '$WorkingDirectory': $($_.Exception.Message)" -ForegroundColor Red
+        throw
+    }
+
     $timestamp = Get-Date -Format "yyyyMMdd-HHmmss"
     $fileName = "NetworkInfo-$($env:COMPUTERNAME)-$timestamp.txt"
-    $OutputPath = Join-Path -Path (Get-Location) -ChildPath $fileName
+    $OutputPath = Join-Path -Path $WorkingDirectory -ChildPath $fileName
+}
+else {
+    # Ensure parent directory exists for explicit OutputPath
+    $parentDir = Split-Path -Path $OutputPath -Parent
+    if ($parentDir -and -not (Test-Path -LiteralPath $parentDir)) {
+        try {
+            New-Item -ItemType Directory -Path $parentDir -Force | Out-Null
+        }
+        catch {
+            Write-Host "ERROR: Failed to prepare directory '$parentDir': $($_.Exception.Message)" -ForegroundColor Red
+            throw
+        }
+    }
 }
 
 Write-Host "Generating network information report..."
@@ -53,7 +87,7 @@ Add-Section "Network Adapters (Up)"
 try {
     Get-NetAdapter |
         Where-Object { $_.Status -eq "Up" } |
-        Select-Object Name, InterfaceDescription, Status, MacAddress, LinkSpeed, MacAddress |
+        Select-Object Name, InterfaceDescription, Status, MacAddress, LinkSpeed |
         Format-Table -AutoSize |
         Out-File -FilePath $OutputPath -Append -Encoding UTF8
 } catch {
@@ -120,7 +154,7 @@ try {
         Out-File -FilePath $OutputPath -Append -Encoding UTF8
 }
 
-# --- Wireless Info (if applicable) ---
+# --- Wireless Info ---
 Add-Section "Wireless (netsh wlan show interfaces)"
 try {
     netsh wlan show interfaces |
