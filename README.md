@@ -1,65 +1,28 @@
-# toolbox
-Toolbox of various IT Tools, including scripts, programs, ISOs, drivers, etc
+# Toolbox
 
---------------------------------------------------------------------------------------------------------------
+Public, non-sensitive scripts and utilities I use for troubleshooting and setup
+on machines I don’t own (clients, friends, family, etc.).
 
-## Windows: PS-GetSystemInfo.ps1
+This repository is designed to be:
 
-Collects basic system information (OS, hardware, disks, network, recent hotfixes)
-and writes a text report to a file.
+- **Safe to inspect** – scripts are plain text, intended to be readable.
+- **Easy to consume** from the command line (PowerShell, curl, etc.).
+- **Non-invasive** – tools here avoid making permanent system-wide changes.
 
-### Download
+> **Important:** Always download a script, read it, and only then run it.  
+> Nothing in this repo is obfuscated; if it ever is, treat that as a red flag.
 
-In **PowerShell**:
+---
 
-```powershell
-Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-GetSystemInfo.ps1" `
-  -OutFile ".\PS-GetSystemInfo.ps1"
-```
+## Quick start (Windows, recommended path)
 
---------------------------------------------------------------------------------------------------------------
+### 1) Prepare a working folder and download tools
 
-## Windows: PS-GetNetworkInfo.ps1
-
-Collects network-related information for troubleshooting:
-
-- Active and all network adapters
-- IP configuration
-- DNS client server addresses
-- IPv4 routing table
-- ARP / neighbor table
-- Wireless interfaces and visible networks
-- Basic connectivity tests to a few common targets
-
-### Download
-
-```powershell
-Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-GetNetworkInfo.ps1" `
-  -OutFile ".\PS-GetNetworkInfo.ps1"
-```
-
---------------------------------------------------------------------------------------------------------------
-
-## Windows: PS-PrepToolbox.ps1
-
-Prepares a clean working folder for toolbox scripts.
-
-What it does:
-
-- Creates a working directory (default: `%TEMP%\YohanToolbox`)
-- Writes a `README.txt` explaining what the folder is for
-- Optionally downloads other toolbox scripts into that directory
-- Does **not** make any machine-wide changes (no registry, no global ExecutionPolicy changes)
-
-### Download
+In **PowerShell** on the target machine:
 
 ```powershell
 Invoke-WebRequest `
   -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-PrepToolbox.ps1" `
   -OutFile ".\PS-PrepToolbox.ps1"
-```
 
---------------------------------------------------------------------------------------------------------------
-
+powershell -ExecutionPolicy Bypass -File .\PS-PrepToolbox.ps1 -DownloadTools
