@@ -33,7 +33,7 @@ If you find these tools useful, **please support the author**:
 Use the Windows PowerShell script to download any or all of these tools directly from SoftwareOK:
 
 ```
-scripts/windows/PS-GetSoftwareOKTools.ps1
+scripts/windows/setup/PS-GetSoftwareOKTools.ps1
 ```
 
 Examples:

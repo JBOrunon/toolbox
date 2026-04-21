@@ -41,7 +41,7 @@ Prepares a working directory for toolbox scripts.
 
 ```powershell
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-PrepToolbox.ps1" `
+  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/setup/PS-PrepToolbox.ps1" `
   -OutFile ".\PS-PrepToolbox.ps1"
 ```
 
@@ -86,7 +86,7 @@ Collects general system information into a text report.
 
 ```powershell
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-GetSystemInfo.ps1" `
+  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/diagnostics/PS-GetSystemInfo.ps1" `
   -OutFile ".\PS-GetSystemInfo.ps1"
 ```
 
@@ -137,7 +137,7 @@ Collects network-related information into a text report.
 
 ```powershell
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-GetNetworkInfo.ps1" `
+  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/diagnostics/PS-GetNetworkInfo.ps1" `
   -OutFile ".\PS-GetNetworkInfo.ps1"
 ```
 
@@ -205,7 +205,7 @@ donation links on SoftwareOK.
 
 ```powershell
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-GetSoftwareOKTools.ps1" `
+  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/setup/PS-GetSoftwareOKTools.ps1" `
   -OutFile ".\PS-GetSoftwareOKTools.ps1"
 ```
 

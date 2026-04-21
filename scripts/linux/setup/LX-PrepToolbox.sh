@@ -142,7 +142,7 @@ if $DOWNLOAD_TOOLS; then
   echo "DownloadTools requested. Downloading Linux toolbox scripts into: ${WORK_DIR}"
   echo
 
-  BASE_URL="https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux"
+  BASE_URL="https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/diagnostics"
   FILES=(
     "LX-GetSystemInfo.sh"
     "LX-GetNetworkInfo.sh"

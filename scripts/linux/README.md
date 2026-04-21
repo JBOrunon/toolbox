@@ -35,7 +35,7 @@ Prepares a working directory for Linux toolbox scripts.
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-PrepToolbox.sh \
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/setup/LX-PrepToolbox.sh \
   -o LX-PrepToolbox.sh
 
 chmod +x LX-PrepToolbox.sh
@@ -78,7 +78,7 @@ Collects general system information into a text report.
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-GetSystemInfo.sh \
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/diagnostics/LX-GetSystemInfo.sh \
   -o LX-GetSystemInfo.sh
 
 chmod +x LX-GetSystemInfo.sh
@@ -125,7 +125,7 @@ Collects network-related information into a text report.
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-GetNetworkInfo.sh \
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/diagnostics/LX-GetNetworkInfo.sh \
   -o LX-GetNetworkInfo.sh
 
 chmod +x LX-GetNetworkInfo.sh

@@ -1,16 +1,31 @@
 # Toolbox
 
-Public, non-sensitive scripts and utilities I use for troubleshooting and setup
-on machines I don’t own (clients, friends, family, etc.).
+Scripts and utilities I use for troubleshooting, setup, and automation —
+on machines I own and machines I don't.
 
-This repository is designed to be:
+Scripts here do a range of things: diagnostics, installs, configuration, downloads.
+What they have in common: they're **plain text, auditable, and documented**.
+Read before you run.
 
-- **Safe to inspect** – scripts are plain text, intended to be readable.
-- **Easy to consume** from the command line (PowerShell, curl, etc.).
-- **Non-invasive** – tools here avoid making permanent system-wide changes.
+> **Important:** Nothing in this repo is obfuscated. If it ever looks unexpectedly
+> complex or suspicious, treat it as untrusted until reviewed.
 
-> **Important:** Always download a script, read it, and only then run it.  
-> Nothing in this repo is obfuscated; if it ever is, treat that as a red flag.
+----------------------------------------------------------------------------------------------------------------------
+
+## Structure
+
+```
+scripts/
+  linux/
+    diagnostics/    — read-only info gathering and reporting
+    setup/          — installs, configuration, prep
+  windows/
+    diagnostics/
+    setup/
+  macos/
+    diagnostics/
+    setup/
+```
 
 ----------------------------------------------------------------------------------------------------------------------
 
@@ -24,7 +39,7 @@ This repository is designed to be:
 
 ```powershell
 Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-PrepToolbox.ps1" `
+  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/setup/PS-PrepToolbox.ps1" `
   -OutFile ".\PS-PrepToolbox.ps1"
 
 powershell -ExecutionPolicy Bypass -File .\PS-PrepToolbox.ps1 -DownloadTools
@@ -58,7 +73,7 @@ Each script writes a timestamped report under C:\jb, for example:
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-PrepToolbox.sh \
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/setup/LX-PrepToolbox.sh \
   -o LX-PrepToolbox.sh
 
 chmod +x LX-PrepToolbox.sh
@@ -75,10 +90,10 @@ This will:
 2. Run the tools from $HOME/jb
 
 ```bash
-    cd "${HOME}/jb"
+cd "${HOME}/jb"
 
-    ./LX-GetSystemInfo.sh
-    ./LX-GetNetworkInfo.sh
+./LX-GetSystemInfo.sh
+./LX-GetNetworkInfo.sh
 ```
 
 Each script writes a timestamped report under $HOME/jb.
@@ -86,51 +101,35 @@ Each script writes a timestamped report under $HOME/jb.
 ----------------------------------------------------------------------------------------------------------------------
 
 ## Tool index
-### Windows
 
-All Windows tools live under scripts/windows
+### Windows — diagnostics
 
-- PS-PrepToolbox.ps1
-	Prepares C:\jb, writes README.txt, and can download other Windows toolbox scripts.
+- **PS-GetSystemInfo.ps1** — Collects OS, hardware, disk, and basic network information into a report under C:\jb.
+- **PS-GetNetworkInfo.ps1** — Collects adapter, IP, DNS, route, wireless, and connectivity information into a report under C:\jb.
 
-- PS-GetSystemInfo.ps1
-	Collects OS, hardware, disk, and basic network information into a report under C:\jb.
+### Windows — setup
 
-- PS-GetNetworkInfo.ps1
-	Collects adapter, IP, DNS, route, wireless, and connectivity information into a report under C:\jb.
+- **PS-PrepToolbox.ps1** — Prepares C:\jb, writes README.txt, and can download Windows diagnostic scripts.
+- **PS-GetSoftwareOKTools.ps1** — Downloads selected freeware tools by Nenad Hrg / SoftwareOK into C:\jb\softwareok.
 
-- PS-GetSoftwareOKTools.ps1
-	Convenience downloader for selected freeware tools by Nenad Hrg / SoftwareOK,
-	saving ZIPs into C:\jb\softwareok. (See scripts/windows/README.md and
-	thirdparty/softwareok/README.md for details and attribution.)
+### Linux — diagnostics
 
-### Linux
+- **LX-GetSystemInfo.sh** — Collects OS/CPU/memory/disk information into a report under $HOME/jb.
+- **LX-GetNetworkInfo.sh** — Collects interface, route, DNS, hosts, and connectivity information into a report under $HOME/jb.
 
-All Linux tools live under scripts/linux
+### Linux — setup
 
-- LX-PrepToolbox.sh
-	Prepares $HOME/jb, writes README.txt, and can download other Linux toolbox scripts.
-
-- LX-GetSystemInfo.sh
-	Collects OS/CPU/memory/disk information into a report under $HOME/jb.
-
-- LX-GetNetworkInfo.sh
-	Collects interface, route, DNS, hosts, and connectivity information into a report under $HOME/jb.
+- **LX-PrepToolbox.sh** — Prepares $HOME/jb, writes README.txt, and can download Linux diagnostic scripts.
+- **LX-InstallObsidian.sh** — Downloads and installs the latest Obsidian AppImage for the current architecture.
 
 ----------------------------------------------------------------------------------------------------------------------
 
 ## Security & trust model
 
-- Scripts are intended to be auditable:
-    - No obfuscation
-    - No silent persistence or registry hacks
-- Default behavior:
-    - Write reports under C:\jb (Windows) or $HOME/jb (Linux)
-    - Avoid machine-wide configuration changes
-- Recommended usage:
-    - Download the script.
-    - Open it in a text editor and review it.
-    - Run it with appropriate flags (e.g., ExecutionPolicy Bypass only for that invocation).
+- Scripts are plain text — no obfuscation, no compiled binaries
+- Read a script before running it; nothing here requires blind trust
+- Default output goes under C:\jb (Windows) or $HOME/jb (Linux) — easy to find and clean up
+- Scripts that require elevated privileges say so explicitly
 
 ----------------------------------------------------------------------------------------------------------------------
 
