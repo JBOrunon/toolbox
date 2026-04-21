@@ -113,6 +113,7 @@ Each script writes a timestamped report under $HOME/jb.
 ### Windows — tools
 
 - **PS-ScheduleShutdown.ps1** — Schedules a forced shutdown after a configurable number of hours (default: 2). Supports -Cancel to abort.
+- **PS-ForceWindowsUpdate.ps1** — Runs a full Windows/Microsoft Update pass and schedules a notified reboot with configurable delay (default: 5 min) if one is required.
 
 ### Windows — setup
 
