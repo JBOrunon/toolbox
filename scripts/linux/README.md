@@ -17,7 +17,7 @@ machines I don’t own. Scripts are designed to be:
 
 --------------------------------------------------------------------------------------------------------
 
-## linux-prep-toolbox.sh
+## LX-PrepToolbox.sh
 
 Prepares a working directory for Linux toolbox scripts.
 
@@ -28,17 +28,17 @@ Prepares a working directory for Linux toolbox scripts.
   - Purpose of the folder
   - Links to the GitHub repo and scripts
 - Optionally downloads:
-  - `linux-get-system-info.sh`
-  - `linux-get-network-info.sh`
+  - `LX-GetSystemInfo.sh`
+  - `LX-GetNetworkInfo.sh`
 
 ### Download
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/linux-prep-toolbox.sh \
-  -o linux-prep-toolbox.sh
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-PrepToolbox.sh \
+  -o LX-PrepToolbox.sh
 
-chmod +x linux-prep-toolbox.sh
+chmod +x LX-PrepToolbox.sh
 ```
 
 ### Usage
@@ -46,23 +46,23 @@ chmod +x linux-prep-toolbox.sh
 - Basic (folder + README only):
 
 ```bash
-./linux-prep-toolbox.sh
+./LX-PrepToolbox.sh
 ```
 
 - Full prep (folder + README + download tools):
 
 ```bash
-./linux-prep-toolbox.sh --download-tools
+./LX-PrepToolbox.sh --download-tools
 ```
 
 - Custom working directory:
 
 ```bash
-./linux-prep-toolbox.sh --dir /tmp/jb --download-tools
+./LX-PrepToolbox.sh --dir /tmp/jb --download-tools
 ```
 -------------------------------------------------------------------------------------------------------------
 
-## linux-get-system-info.sh
+## LX-GetSystemInfo.sh
 
 Collects general system information into a text report.
 
@@ -78,16 +78,16 @@ Collects general system information into a text report.
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/linux-get-system-info.sh \
-  -o linux-get-system-info.sh
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-GetSystemInfo.sh \
+  -o LX-GetSystemInfo.sh
 
-chmod +x linux-get-system-info.sh
+chmod +x LX-GetSystemInfo.sh
 ```
 
 ### Usage
 
 - Default (writes under $HOME/jb):
-> ./linux-get-system-info.sh
+> ./LX-GetSystemInfo.sh
 
 This will create a file such as:
 > $HOME/jb/systeminfo-HOST-YYYYMMDD-HHMMSS.txt
@@ -95,20 +95,20 @@ This will create a file such as:
 - Explicit output path:
 
 ```bash
-./linux-get-system-info.sh --output /tmp/systeminfo.txt
+./LX-GetSystemInfo.sh --output /tmp/systeminfo.txt
 ```
 
 - Custom working directory:
 
 ```bash
-./linux-get-system-info.sh --dir /tmp/jb
+./LX-GetSystemInfo.sh --dir /tmp/jb
 ```
 
 > Note: If --output is provided, it takes precedence over --dir.
 
 ------------------------------------------------------------------------------------------
 
-## linux-get-network-info.sh
+## LX-GetNetworkInfo.sh
 
 Collects network-related information into a text report.
 
@@ -125,16 +125,16 @@ Collects network-related information into a text report.
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/linux-get-network-info.sh \
-  -o linux-get-network-info.sh
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-GetNetworkInfo.sh \
+  -o LX-GetNetworkInfo.sh
 
-chmod +x linux-get-network-info.sh
+chmod +x LX-GetNetworkInfo.sh
 ```
 
 ### Usage
 
 - Default (writes under $HOME/jb):
-> ./linux-get-network-info.sh
+> ./LX-GetNetworkInfo.sh
 
 This will create a file such as:
 > $HOME/jb/networkinfo-HOST-YYYYMMDD-HHMMSS.txt
@@ -142,18 +142,18 @@ This will create a file such as:
 - Explicit output path:
 
 ```bash
-./linux-get-network-info.sh --output /tmp/networkinfo.txt
+./LX-GetNetworkInfo.sh --output /tmp/networkinfo.txt
 ```
 
 - Custom working directory:
 ```bash
-./linux-get-network-info.sh --dir /tmp/jb
+./LX-GetNetworkInfo.sh --dir /tmp/jb
 ```
 
 - Custom connectivity targets:
 
 ```bash
-./linux-get-network-info.sh --targets "8.8.8.8,1.1.1.1,github.com"
+./LX-GetNetworkInfo.sh --targets "8.8.8.8,1.1.1.1,github.com"
 ```
 
 --------------------------------------------------------------------------------------------------------------

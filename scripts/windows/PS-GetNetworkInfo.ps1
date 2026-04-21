@@ -1,14 +1,32 @@
 <#
+.TITLE
+    PS-GetNetworkInfo
+
+.AUTHOR
+    JBOrunon
+
+.WRITTEN
+    2025-12-09
+
+.MODIFIED
+    2026-04-21 — updated header to standard format
+
+.LLM
+    Claude Sonnet 4.6
+
 .SYNOPSIS
-  Collects network-related information for troubleshooting.
+    Collects network-related information for troubleshooting.
 
 .DESCRIPTION
-  Generates a text report with adapter details, IP configuration,
-  DNS servers, routes, ARP table, and basic connectivity tests.
-  By default, writes the report under C:\jb.
+    Generates a text report with adapter details, IP configuration, DNS servers,
+    routes, ARP table, and basic connectivity tests. By default, writes the
+    report under C:\jb. Read-only — no system changes made.
+
+.REQUIRES
+    PowerShell 5.1+, Windows 10 / Server 2016+, internet access (for connectivity tests)
 
 .REPO
-  https://github.com/JBOrunon/toolbox
+    https://github.com/JBOrunon/toolbox
 #>
 
 [CmdletBinding()]

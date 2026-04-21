@@ -1,13 +1,27 @@
 #!/usr/bin/env bash
 #
-# linux-prep-toolbox.sh
+# ------------------------------------------------------------------------------
+# TITLE:    LX-PrepToolbox
+# AUTHOR:   JBOrunon
+# WRITTEN:  2025-12-09
+# MODIFIED: 2026-04-21 — renamed to LX- convention, updated header and references
+# LLM:      Claude Sonnet 4.6
+# ------------------------------------------------------------------------------
 #
-# Prepares a working directory for Linux toolbox scripts.
-# - Default work dir: $HOME/jb
-# - Writes a README.txt into the work dir
-# - Optionally downloads linux-get-system-info.sh and linux-get-network-info.sh
+# SYNOPSIS
+#   Prepares a working directory for Linux toolbox scripts.
 #
-# Repo: https://github.com/JBOrunon/toolbox
+# DESCRIPTION
+#   Creates $HOME/jb (or a custom dir), writes a README.txt, and optionally
+#   downloads LX-GetSystemInfo.sh and LX-GetNetworkInfo.sh into that directory.
+#
+# REQUIRES
+#   bash 4+, curl or wget (for --download-tools), internet access (for --download-tools)
+#
+# REPO
+#   https://github.com/JBOrunon/toolbox
+#
+# ------------------------------------------------------------------------------
 
 set -u
 set -o pipefail
@@ -75,7 +89,7 @@ cat > "$README_PATH" <<'EOF'
 Linux Toolbox Working Directory
 ===============================
 
-This folder was prepared by linux-prep-toolbox.sh.
+This folder was prepared by LX-PrepToolbox.sh.
 
 Default location:
   $HOME/jb
@@ -91,8 +105,8 @@ Notes:
   unless explicitly documented otherwise.
 
 Common scripts (Linux):
-- linux-get-system-info.sh
-- linux-get-network-info.sh
+- LX-GetSystemInfo.sh
+- LX-GetNetworkInfo.sh
 
 Recommended usage pattern:
 - Download a script into this folder.
@@ -101,8 +115,8 @@ Recommended usage pattern:
     bash ./script-name.sh
 
 Default report locations:
-- linux-get-system-info.sh writes reports under this folder (e.g., ~/jb/systeminfo-...).
-- linux-get-network-info.sh writes reports under this folder (e.g., ~/jb/networkinfo-...).
+- LX-GetSystemInfo.sh writes reports under this folder (e.g., ~/jb/systeminfo-...).
+- LX-GetNetworkInfo.sh writes reports under this folder (e.g., ~/jb/networkinfo-...).
 EOF
 
 echo "Wrote README: ${README_PATH}"
@@ -130,8 +144,8 @@ if $DOWNLOAD_TOOLS; then
 
   BASE_URL="https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux"
   FILES=(
-    "linux-get-system-info.sh"
-    "linux-get-network-info.sh"
+    "LX-GetSystemInfo.sh"
+    "LX-GetNetworkInfo.sh"
   )
 
   for name in "${FILES[@]}"; do

@@ -1,11 +1,28 @@
 #!/usr/bin/env bash
 #
-# linux-get-network-info.sh
+# ------------------------------------------------------------------------------
+# TITLE:    LX-GetNetworkInfo
+# AUTHOR:   JBOrunon
+# WRITTEN:  2025-12-09
+# MODIFIED: 2026-04-21 — renamed to LX- convention, updated header
+# LLM:      Claude Sonnet 4.6
+# ------------------------------------------------------------------------------
 #
-# Collects network-related information into a text report.
-# Default output: $HOME/jb/networkinfo-HOST-YYYYMMDD-HHMMSS.txt
+# SYNOPSIS
+#   Collects network-related information into a text report.
 #
-# Repo: https://github.com/JBOrunon/toolbox
+# DESCRIPTION
+#   Gathers interface addresses, routing table, DNS config, hosts file,
+#   listening sockets, and connectivity test results. Writes a timestamped
+#   report to $HOME/jb (or a custom path). Read-only — no system changes made.
+#
+# REQUIRES
+#   bash 4+, ip or ifconfig, ss or netstat, ping, internet access (for connectivity tests)
+#
+# REPO
+#   https://github.com/JBOrunon/toolbox
+#
+# ------------------------------------------------------------------------------
 
 set -u
 set -o pipefail

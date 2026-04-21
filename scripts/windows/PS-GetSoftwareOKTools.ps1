@@ -1,56 +1,55 @@
 <#
+.TITLE
+    PS-GetSoftwareOKTools
+
+.AUTHOR
+    JBOrunon
+
+.WRITTEN
+    2025-12-09
+
+.MODIFIED
+    2026-04-21 — updated header to standard format
+
+.LLM
+    Claude Sonnet 4.6
+
 .SYNOPSIS
-    Download selected SoftwareOK tools directly from SoftwareOK.com.
+    Downloads selected SoftwareOK tools directly from SoftwareOK.com.
 
 .DESCRIPTION
-    Convenience downloader for a handful of excellent freeware utilities
-    written by Nenad Hrg and published on SoftwareOK.com.
+    Convenience downloader for freeware utilities by Nenad Hrg / SoftwareOK.
+    Downloads ZIPs into C:\jb\softwareok by default. Always pulls from official
+    SoftwareOK URLs — never modifies the downloaded ZIPs. Supports downloading
+    individual tools by key or everything at once with -All.
+    All credit for these tools goes to Nenad Hrg / SoftwareOK (softwareok.com).
 
-    Defaults:
-      - Uses C:\jb as the overall work area
-      - Downloads into: C:\jb\softwareok
-
-    This script:
-      - Always downloads from the OFFICIAL SoftwareOK URLs
-      - Never modifies the downloaded ZIPs
-      - Can optionally download a subset by name, or everything at once
+.REQUIRES
+    PowerShell 5.1+, Windows 10 / Server 2016+, internet access
 
 .PARAMETER Name
     One or more tool keys to download. Valid values:
-
-      DeleteOnReboot
-      DesktopNoteOKInstaller
-      DesktopNoteOKPortable
-      ThisIsMyFile
-      DirPrintOKInstaller
-      DirPrintOKPortable
-      DontSleep
-      DontSleepPortable
-      QDirInstaller
-      QDirPortable
+      DeleteOnReboot, DesktopNoteOKInstaller, DesktopNoteOKPortable,
+      ThisIsMyFile, DirPrintOKInstaller, DirPrintOKPortable,
+      DontSleep, DontSleepPortable, QDirInstaller, QDirPortable
 
 .PARAMETER All
     Download all known tools.
 
 .PARAMETER Destination
-    Target directory for the ZIP files.
-    Defaults to: C:\jb\softwareok
+    Target directory for the ZIP files. Default: C:\jb\softwareok
 
 .EXAMPLE
-    # Download everything into the default work area (C:\jb\softwareok)
     .\PS-GetSoftwareOKTools.ps1 -All
 
 .EXAMPLE
-    # Download just Q-Dir (installer + portable)
     .\PS-GetSoftwareOKTools.ps1 -Name QDirInstaller, QDirPortable
 
 .EXAMPLE
-    # Custom destination
     .\PS-GetSoftwareOKTools.ps1 -All -Destination 'D:\Tools\SoftwareOK'
 
-.NOTES
-    All credit for these tools goes to Nenad Hrg / SoftwareOK.
-    Homepage: https://www.softwareok.com/
+.REPO
+    https://github.com/JBOrunon/toolbox
 #>
 
 [CmdletBinding()]

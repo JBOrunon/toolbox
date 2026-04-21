@@ -1,11 +1,28 @@
 #!/usr/bin/env bash
 #
-# linux-get-system-info.sh
+# ------------------------------------------------------------------------------
+# TITLE:    LX-GetSystemInfo
+# AUTHOR:   JBOrunon
+# WRITTEN:  2025-12-09
+# MODIFIED: 2026-04-21 — renamed to LX- convention, updated header
+# LLM:      Claude Sonnet 4.6
+# ------------------------------------------------------------------------------
 #
-# Collects general system information into a text report.
-# Default output: $HOME/jb/systeminfo-HOST-YYYYMMDD-HHMMSS.txt
+# SYNOPSIS
+#   Collects general system information into a text report.
 #
-# Repo: https://github.com/JBOrunon/toolbox
+# DESCRIPTION
+#   Gathers OS, kernel, CPU, memory, disk, and uptime info and writes a
+#   timestamped report to $HOME/jb (or a custom path). Output is plain text,
+#   read-only — no system changes are made.
+#
+# REQUIRES
+#   bash 4+, standard Linux utilities (uname, lscpu, free, df, lsblk)
+#
+# REPO
+#   https://github.com/JBOrunon/toolbox
+#
+# ------------------------------------------------------------------------------
 
 set -u
 set -o pipefail

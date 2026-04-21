@@ -58,27 +58,27 @@ Each script writes a timestamped report under C:\jb, for example:
 
 ```bash
 curl -fsSL \
-  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/linux-prep-toolbox.sh \
-  -o linux-prep-toolbox.sh
+  https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/linux/LX-PrepToolbox.sh \
+  -o LX-PrepToolbox.sh
 
-chmod +x linux-prep-toolbox.sh
-./linux-prep-toolbox.sh --download-tools
+chmod +x LX-PrepToolbox.sh
+./LX-PrepToolbox.sh --download-tools
 ```
 
 This will:
 - Create a working directory (default: $HOME/jb)
 - Write a README.txt into that folder
 - Download these Linux tools into $HOME/jb:
-	- linux-get-system-info.sh
-	- linux-get-network-info.sh
+	- LX-GetSystemInfo.sh
+	- LX-GetNetworkInfo.sh
 
 2. Run the tools from $HOME/jb
 
 ```bash
     cd "${HOME}/jb"
 
-    ./linux-get-system-info.sh
-    ./linux-get-network-info.sh
+    ./LX-GetSystemInfo.sh
+    ./LX-GetNetworkInfo.sh
 ```
 
 Each script writes a timestamped report under $HOME/jb.
@@ -108,13 +108,13 @@ All Windows tools live under scripts/windows
 
 All Linux tools live under scripts/linux
 
-- linux-prep-toolbox.sh
+- LX-PrepToolbox.sh
 	Prepares $HOME/jb, writes README.txt, and can download other Linux toolbox scripts.
 
-- linux-get-system-info.sh
+- LX-GetSystemInfo.sh
 	Collects OS/CPU/memory/disk information into a report under $HOME/jb.
 
-- linux-get-network-info.sh
+- LX-GetNetworkInfo.sh
 	Collects interface, route, DNS, hosts, and connectivity information into a report under $HOME/jb.
 
 ----------------------------------------------------------------------------------------------------------------------

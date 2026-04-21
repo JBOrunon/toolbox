@@ -1,13 +1,31 @@
 <#
+.TITLE
+    PS-GetSystemInfo
+
+.AUTHOR
+    JBOrunon
+
+.WRITTEN
+    2025-12-09
+
+.MODIFIED
+    2026-04-21 — updated header to standard format
+
+.LLM
+    Claude Sonnet 4.6
+
 .SYNOPSIS
-  Collects basic system information for troubleshooting.
+    Collects basic system information for troubleshooting.
 
 .DESCRIPTION
-  Generates a text report with OS, hardware, disk, and network info.
-  By default, writes the report under C:\jb.
+    Generates a text report with OS, hardware, disk, and network info.
+    By default, writes the report under C:\jb. Read-only — no system changes made.
+
+.REQUIRES
+    PowerShell 5.1+, Windows 10 / Server 2016+
 
 .REPO
-  https://github.com/JBOrunon/toolbox
+    https://github.com/JBOrunon/toolbox
 #>
 
 [CmdletBinding()]

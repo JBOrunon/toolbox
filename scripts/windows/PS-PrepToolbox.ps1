@@ -1,15 +1,32 @@
 <#
+.TITLE
+    PS-PrepToolbox
+
+.AUTHOR
+    JBOrunon
+
+.WRITTEN
+    2025-12-09
+
+.MODIFIED
+    2026-04-21 — updated header to standard format, fixed name leak in README.txt
+
+.LLM
+    Claude Sonnet 4.6
+
 .SYNOPSIS
-  Prepares a working folder for toolbox scripts.
+    Prepares a working folder for toolbox scripts.
 
 .DESCRIPTION
-  - Creates a working directory (default: C:\jb)
-  - Writes a README.txt explaining what this folder is for
-  - Optionally downloads other toolbox scripts into that folder
-  - Does NOT change system-wide settings or registry
+    Creates a working directory (default: C:\jb), writes a README.txt explaining
+    the folder's purpose, and optionally downloads PS-GetSystemInfo.ps1 and
+    PS-GetNetworkInfo.ps1. Does not change system-wide settings or registry.
+
+.REQUIRES
+    PowerShell 5.1+, Windows 10 / Server 2016+, internet access (for -DownloadTools)
 
 .REPO
-  https://github.com/JBOrunon/toolbox
+    https://github.com/JBOrunon/toolbox
 #>
 
 [CmdletBinding()]
