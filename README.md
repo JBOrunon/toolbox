@@ -19,12 +19,15 @@ scripts/
   linux/
     diagnostics/    — read-only info gathering and reporting
     setup/          — installs, configuration, prep
+    tools/          — general-purpose utility actions
   windows/
     diagnostics/
     setup/
+    tools/
   macos/
     diagnostics/
     setup/
+    tools/
 ```
 
 ----------------------------------------------------------------------------------------------------------------------
@@ -106,6 +109,10 @@ Each script writes a timestamped report under $HOME/jb.
 
 - **PS-GetSystemInfo.ps1** — Collects OS, hardware, disk, and basic network information into a report under C:\jb.
 - **PS-GetNetworkInfo.ps1** — Collects adapter, IP, DNS, route, wireless, and connectivity information into a report under C:\jb.
+
+### Windows — tools
+
+- **PS-ScheduleShutdown.ps1** — Schedules a forced shutdown after a configurable number of hours (default: 2). Supports -Cancel to abort.
 
 ### Windows — setup
 
