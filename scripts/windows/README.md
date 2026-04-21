@@ -45,30 +45,6 @@ Invoke-WebRequest `
   -OutFile ".\PS-PrepToolbox.ps1"
 ```
 
---------------------------------------------------------------------------------------------------------------------------
-
-## PS-PrepToolbox.ps1
-
-Prepares a working directory for toolbox scripts.
-
-### Behavior
-
-- Creates a working directory (default: `C:\jb`)
-- Writes a `README.txt` into that directory with:
-  - Purpose of the folder
-  - Links to the GitHub repo and scripts
-- Optionally downloads:
-  - `PS-GetSystemInfo.ps1`
-  - `PS-GetNetworkInfo.ps1`
-
-### Download
-
-```powershell
-Invoke-WebRequest `
-  -Uri "https://raw.githubusercontent.com/JBOrunon/toolbox/main/scripts/windows/PS-PrepToolbox.ps1" `
-  -OutFile ".\PS-PrepToolbox.ps1"
-```
-
 ### Usage
 
 - Basic (folder + README only):
@@ -87,7 +63,7 @@ powershell -ExecutionPolicy Bypass -File .\PS-PrepToolbox.ps1 -DownloadTools
 
 ```powershell
 powershell -ExecutionPolicy Bypass -File .\PS-PrepToolbox.ps1 `
-  -WorkingDirectory "C:\Temp\YohanToolbox" `
+  -WorkingDirectory "C:\Temp\jb" `
   -DownloadTools
 ```
 

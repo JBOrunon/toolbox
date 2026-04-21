@@ -46,8 +46,8 @@ catch {
 $readmePath = Join-Path -Path $WorkingDirectory -ChildPath "README.txt"
 
 $readmeLines = @(
-    "Yohan Toolbox Working Directory",
-    "================================",
+    "JB Toolbox Working Directory",
+    "=============================",
     "",
     "This folder was prepared by PS-PrepToolbox.ps1.",
     "",
