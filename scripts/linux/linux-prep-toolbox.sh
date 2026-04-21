@@ -1,4 +1,4 @@
-git push#!/usr/bin/env bash
+#!/usr/bin/env bash
 #
 # linux-prep-toolbox.sh
 #
