@@ -1,0 +1,15 @@
+# DMS Reference File — list one path per line
+# Lines starting with # are ignored. Blank lines are ignored.
+# Paths can be individual files or folders (folders are wiped recursively).
+# Use full absolute paths only.
+
+# Example: individual files
+C:\Users\Username\Documents\SensitiveDocument.pdf
+C:\Users\Username\Desktop\PrivateNotes.txt
+
+# Example: folders (all contents wiped, folder removed)
+C:\Users\Username\Documents\PersonalFolder
+
+# Example: app data folders
+C:\Users\Username\AppData\Roaming\AppName
+C:\Users\Username\AppData\Local\AppName
