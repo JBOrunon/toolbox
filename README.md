@@ -123,6 +123,7 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-ForceWindowsUpdate.ps1** — Runs a full Windows/Microsoft Update pass and schedules a notified reboot with configurable delay (default: 5 min) if one is required.
 - **PS-KeepAlive.ps1** — Prevents sleep and screen lock using the Windows power API. No clipboard side effects. Press Enter to stop.
 - **PS-KeepAlive_Legacy.ps1 / .bat** — Original PrintScreen-based keep-alive. Preserved for reference; use PS-KeepAlive.ps1 instead.
+- **PS-ClearPrintSpooler.ps1** — Stops the Print Spooler, clears the queue, restarts the service. Fixes stuck print jobs.
 
 ### Windows — setup
 
