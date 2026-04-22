@@ -116,7 +116,7 @@ Each script writes a timestamped report under $HOME/jb.
 
 - **PS-GetScreenLockStatus.ps1** — Reports whether the screen is locked and which user is logged in.
 - **PS-ExportEventLogs.ps1** — Exports Windows and PrintService event logs to .evtx files and compresses them into a ZIP archive.
-
+- **PS-GetBitLockerKey.ps1** — Exports BitLocker key protector info and basic computer details to a text file for offline recovery reference.
 - **PS-GetSystemInfo.ps1** — Collects OS, hardware, disk, and basic network information into a report under C:\jb.
 - **PS-GetNetworkInfo.ps1** — Collects adapter, IP, DNS, route, wireless, and connectivity information into a report under C:\jb.
 
@@ -131,17 +131,21 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-RobocopyWithVerify.ps1** — Copies files using Robocopy, then verifies integrity with SHA256 hashing. Logs copy and verification results to C:\jb\logs\.
 - **PS-DisableAdobeAI.ps1** — Disables Adobe Acrobat AI/Generative features via registry policy. Logs result to C:\jb\logs\.
 - **PS-KeywordSearch.ps1** — Recursively searches a folder for files containing keywords from a keyword list file. Writes matching paths and matched keywords to an output file.
-- **PS-AddLocalAdmin.ps1** — Creates a local user account and adds it to the Administrators group.
 - **PS-RemoveEmptyFolders.ps1** — Deletes empty immediate subfolders of a directory. Supports -WhatIf for a dry run.
 - **PS-RemoveNetworkProfiles.ps1** — Removes all Windows network connection profiles, resetting interface trust state (Public/Private/Domain). Does not remove saved Wi-Fi passwords.
 - **PS-RemoveRdpFiles.ps1** — Deletes all .rdp files from every user's Desktop. Supports -WhatIf for a dry run.
 - **PS-WindowsTimeFix.ps1** — Resets and reconfigures the Windows Time Service (w32tm) to sync from a specified NTP server (default: time.nist.gov).
 - **PS-ListFolders.ps1** — Lists subfolders of a directory into a deduplicated, sorted text file.
+- **PS-DisableRdpUdp.ps1** — Disables UDP on RDP port 3389 via registry and restarts Remote Desktop Services. Returns exit codes for RMM use.
+- **PS-UninstallSentinelOne.ps1** — Silently uninstalls the SentinelOne agent, cleans up files and registry, and restarts. Supports anti-tamper passphrase.
+- **PS-MakeMonthFolder.ps1** — Creates a yyyy_MM named subfolder under a given path if it does not already exist. Intended for monthly scheduling.
 
 ### Windows — setup
 
 - **PS-PrepToolbox.ps1** — Prepares C:\jb, writes README.txt, and can download Windows diagnostic scripts.
 - **PS-GetSoftwareOKTools.ps1** — Downloads selected freeware tools by Nenad Hrg / SoftwareOK into C:\jb\softwareok.
+- **PS-JoinDomain.ps1** — Joins the local machine to an Active Directory domain.
+- **PS-AddLocalAdmin.ps1** — Creates a local user account and adds it to the Administrators group.
 
 ### Linux — diagnostics
 
