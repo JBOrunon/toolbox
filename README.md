@@ -124,6 +124,7 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-KeepAlive.ps1** — Prevents sleep and screen lock using the Windows power API. No clipboard side effects. Press Enter to stop.
 - **PS-KeepAlive_Legacy.ps1 / .bat** — Original PrintScreen-based keep-alive. Preserved for reference; use PS-KeepAlive.ps1 instead.
 - **PS-ClearPrintSpooler.ps1** — Stops the Print Spooler, clears the queue, restarts the service. Fixes stuck print jobs.
+- **PS-CopyWithLog.ps1** — Copies a folder tree with progress bar and error log. Logs go to C:\jb\logs\.
 
 ### Windows — setup
 
