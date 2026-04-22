@@ -128,6 +128,7 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-KeepAlive_Legacy.ps1 / .bat** — Original PrintScreen-based keep-alive. Preserved for reference; use PS-KeepAlive.ps1 instead.
 - **PS-ClearPrintSpooler.ps1** — Stops the Print Spooler, clears the queue, restarts the service. Fixes stuck print jobs.
 - **PS-CopyWithLog.ps1** — Copies a folder tree with progress bar and error log. Logs go to C:\jb\logs\.
+- **PS-RobocopyWithVerify.ps1** — Copies files using Robocopy, then verifies integrity with SHA256 hashing. Logs copy and verification results to C:\jb\logs\.
 - **PS-DisableAdobeAI.ps1** — Disables Adobe Acrobat AI/Generative features via registry policy. Logs result to C:\jb\logs\.
 - **PS-KeywordSearch.ps1** — Recursively searches a folder for files containing keywords from a keyword list file. Writes matching paths and matched keywords to an output file.
 - **PS-AddLocalAdmin.ps1** — Creates a local user account and adds it to the Administrators group.
