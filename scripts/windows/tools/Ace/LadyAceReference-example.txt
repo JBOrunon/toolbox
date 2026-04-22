@@ -1,0 +1,5 @@
+C:\Users\Username\Documents
+C:\Users\Username\Desktop
+C:\Users\Username\Pictures
+C:\Users\Username\Downloads
+C:\Users\Username\AppData\Roaming\application-name
