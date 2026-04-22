@@ -105,6 +105,13 @@ Each script writes a timestamped report under $HOME/jb.
 
 ## Tool index
 
+### DuckyScript — Windows
+
+- **DS-GetSerialNumber.txt** — Gets system serial number, saves to C:\serial.txt, prints hostname. Requires open admin terminal.
+- **DS-UAC_Creds.txt** — Types credentials into an open UAC prompt (single-page). Fill in username/password before deploying.
+- **DS-UAC_Creds_TwoPage.txt** — Same as above for UAC prompts that split username and password onto separate pages.
+
+
 ### Windows — diagnostics
 
 - **PS-GetSystemInfo.ps1** — Collects OS, hardware, disk, and basic network information into a report under C:\jb.

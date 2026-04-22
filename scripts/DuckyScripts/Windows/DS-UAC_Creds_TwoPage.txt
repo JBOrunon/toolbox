@@ -1,0 +1,11 @@
+REM DS-UAC_Creds_TwoPage | https://github.com/JBOrunon/toolbox
+REM Enters credentials into an already-open UAC prompt where username and password
+REM are on separate pages (submit username first, then password).
+REM Replace <UserName> and <Password> before deploying.
+REM
+DELAY 1000
+STRING <UserName>
+ENTER
+DELAY 1000
+STRING <Password>
+ENTER

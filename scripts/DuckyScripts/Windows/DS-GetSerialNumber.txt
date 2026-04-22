@@ -1,0 +1,7 @@
+REM DS-GetSerialNumber | https://github.com/JBOrunon/toolbox
+REM Gets the system serial number, saves to C:\serial.txt, and prints hostname.
+REM Requires an admin terminal to already be open.
+REM
+STRINGLN Get-WmiObject win32_bios | Select-Object -ExpandProperty SerialNumber | Tee-Object -FilePath C:\serial.txt
+DELAY 1000
+STRINGLN hostname
