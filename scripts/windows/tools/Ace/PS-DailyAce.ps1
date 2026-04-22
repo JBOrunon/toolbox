@@ -12,6 +12,8 @@
 .MODIFIED
     2026-04-22 — promoted to toolbox; stripped private info; conventions and header applied;
                  PIN made mandatory; log moved to C:\jb\logs\
+    2026-04-22 — v2: replaced PIN/targeting-file drive identification with Volume GUID;
+                 removed ExternalFolderName parameter
 
 .LLM
     Claude Sonnet 4.6
@@ -20,19 +22,19 @@
     Copies a defined list of folders to a verified external drive.
 
 .DESCRIPTION
-    Finds an external drive by looking for a target identification file (DailyAceTargeting.txt)
-    and verifying a PIN on its last line. Copies each folder listed in the reference file into
-    a HOSTNAME-DailyAce folder on that drive. Failures are logged to C:\jb\logs\.
+    Finds an external drive by its Windows Volume GUID and copies each folder listed in the
+    reference file into a HOSTNAME-DailyAce folder on that drive. Failures are logged to
+    C:\jb\logs\.
 
     Designed for scheduled execution via Windows Task Scheduler. The task must run under a
     local administrator account with "Run whether user is logged on or not" and "Run with
-    highest privileges" enabled. Pass -DailyAcePin as an argument in the Task Scheduler action.
+    highest privileges" enabled. Pass -TargetVolumeId as an argument in the Task Scheduler
+    action. See README.md in this folder for setup instructions.
 
-    The target drive must contain a file named DailyAceTargeting.txt with the PIN on its last
-    line. See DailyAceReference-example.txt for the expected reference file format.
+    See DailyAceReference-example.txt for the expected reference file format.
 
 .REQUIRES
-    PowerShell 5.1+, local administrator account, target drive with DailyAceTargeting.txt
+    PowerShell 5.1+, local administrator account, target drive Volume GUID
 
 .REPO
     https://github.com/JBOrunon/toolbox
@@ -41,10 +43,8 @@
 param (
     [string]$LocalDailyAce = "C:\Ace\DailyAce",
     [string]$DailyAceReference = "$LocalDailyAce\DailyAceReference.txt",
-    [string]$DailyAceTarget = "DailyAceTargeting.txt",
     [Parameter(Mandatory)]
-    [string]$DailyAcePin,
-    [string]$ExternalFolderName = "External-DailyAce"
+    [string]$TargetVolumeId
 )
 
 $dateSuffix = (Get-Date).ToString("MMddyy")
@@ -53,20 +53,15 @@ $HostName = $env:COMPUTERNAME
 $DailyAceFolderName = "$HostName-DailyAce"
 
 function Get-DestinationDrive {
-    $drives = Get-PSDrive -PSProvider FileSystem
-    foreach ($drive in $drives) {
-        $targetFilePath = "$($drive.Root)\$DailyAceTarget"
-        if (Test-Path $targetFilePath) {
-            $lines = Get-Content -Path $targetFilePath
-            $pin = $lines[-1]
-            if ($pin -eq $DailyAcePin) {
-                return $drive.Root
-            } else {
-                $global:failures += "PIN verification failed for drive $($drive.Root)."
-            }
-        }
+    param ([string]$volumeId)
+    $volume = Get-Volume | Where-Object { $_.UniqueId -eq $volumeId }
+    if ($null -eq $volume) {
+        throw "Target volume '$volumeId' not found. Ensure the drive is connected."
     }
-    throw "Destination drive with ID file '$DailyAceTarget' and valid PIN not found."
+    if ($null -eq $volume.DriveLetter) {
+        throw "Target volume found but has no drive letter assigned."
+    }
+    return "$($volume.DriveLetter):\"
 }
 
 function Copy-FolderContents {
@@ -95,11 +90,9 @@ if (-not (Test-Path "C:\jb\logs")) { New-Item -ItemType Directory -Path "C:\jb\l
 if (Test-Path $DailyAceLog) { Remove-Item $DailyAceLog }
 
 try {
-    $destinationDrive = Get-DestinationDrive
+    $destinationDrive = Get-DestinationDrive -volumeId $TargetVolumeId
     $DailyAcePath = Join-Path -Path $destinationDrive -ChildPath $DailyAceFolderName
-    $externalPath = Join-Path -Path $destinationDrive -ChildPath $ExternalFolderName
     if (-not (Test-Path $DailyAcePath)) { New-Item -ItemType Directory -Path $DailyAcePath }
-    if (-not (Test-Path $externalPath)) { New-Item -ItemType Directory -Path $externalPath }
     if (-not (Test-Path $LocalDailyAce)) { New-Item -ItemType Directory -Path $LocalDailyAce }
 } catch {
     $global:failures += $_.Exception.Message

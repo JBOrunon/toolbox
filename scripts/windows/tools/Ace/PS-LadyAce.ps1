@@ -14,6 +14,8 @@
                  PIN made mandatory; log moved to C:\jb\logs\; replaced deprecated WMI with
                  Checkpoint-Computer; fixed backup search path, undefined $backupImagePath,
                  and double-Move bug; backup preserved as .vhdx (WindowsImageBackup structure)
+    2026-04-22 — v2: replaced PIN/targeting-file drive identification with Volume GUID;
+                 removed ExternalFolderName parameter
 
 .LLM
     Claude Sonnet 4.6
@@ -22,22 +24,22 @@
     Copies a defined list of folders to a verified external drive and creates a full system image backup.
 
 .DESCRIPTION
-    Finds an external drive by looking for a target identification file (LadyAceTargeting.txt)
-    and verifying a PIN on its last line. Copies each folder listed in the reference file into
-    a HOSTNAME-LadyAce folder on that drive. Also creates a Windows System Restore Point and a
-    full system image backup using wbadmin. The WindowsImageBackup folder structure is copied to
-    both the external LadyAce folder and to local storage. Failures are logged to C:\jb\logs\.
+    Finds an external drive by its Windows Volume GUID and copies each folder listed in the
+    reference file into a HOSTNAME-LadyAce folder on that drive. Also creates a Windows System
+    Restore Point and a full system image backup using wbadmin. The WindowsImageBackup folder
+    structure is copied to both the external LadyAce folder and to local storage. Failures are
+    logged to C:\jb\logs\.
 
     Designed for scheduled execution via Windows Task Scheduler. The task must run under a
     local administrator account with "Run whether user is logged on or not" and "Run with
-    highest privileges" enabled. Pass -LadyAcePin as an argument in the Task Scheduler action.
+    highest privileges" enabled. Pass -TargetVolumeId as an argument in the Task Scheduler
+    action. See README.md in this folder for setup instructions.
 
-    The target drive must contain a file named LadyAceTargeting.txt with the PIN on its last
-    line. System Restore must be enabled on C:\ for the restore point step to succeed.
+    System Restore must be enabled on C:\ for the restore point step to succeed.
     See LadyAceReference-example.txt for the expected reference file format.
 
 .REQUIRES
-    PowerShell 5.1+, local administrator account, target drive with LadyAceTargeting.txt
+    PowerShell 5.1+, local administrator account, target drive Volume GUID
 
 .REPO
     https://github.com/JBOrunon/toolbox
@@ -46,10 +48,8 @@
 param (
     [string]$LocalLadyAce = "C:\Ace\LadyAce",
     [string]$LadyAceReference = "$LocalLadyAce\LadyAceReference.txt",
-    [string]$LadyAceTarget = "LadyAceTargeting.txt",
     [Parameter(Mandatory)]
-    [string]$LadyAcePin,
-    [string]$ExternalFolderName = "External-LadyAce"
+    [string]$TargetVolumeId
 )
 
 $dateSuffix = (Get-Date).ToString("MMddyy")
@@ -58,20 +58,15 @@ $HostName = $env:COMPUTERNAME
 $LadyAceFolderName = "$HostName-LadyAce"
 
 function Get-DestinationDrive {
-    $drives = Get-PSDrive -PSProvider FileSystem
-    foreach ($drive in $drives) {
-        $targetFilePath = "$($drive.Root)\$LadyAceTarget"
-        if (Test-Path $targetFilePath) {
-            $lines = Get-Content -Path $targetFilePath
-            $pin = $lines[-1]
-            if ($pin -eq $LadyAcePin) {
-                return $drive.Root
-            } else {
-                $global:failures += "PIN verification failed for drive $($drive.Root)."
-            }
-        }
+    param ([string]$volumeId)
+    $volume = Get-Volume | Where-Object { $_.UniqueId -eq $volumeId }
+    if ($null -eq $volume) {
+        throw "Target volume '$volumeId' not found. Ensure the drive is connected."
     }
-    throw "Destination drive with ID file '$LadyAceTarget' and valid PIN not found."
+    if ($null -eq $volume.DriveLetter) {
+        throw "Target volume found but has no drive letter assigned."
+    }
+    return "$($volume.DriveLetter):\"
 }
 
 function Copy-FolderContents {
@@ -132,11 +127,9 @@ if (-not (Test-Path "C:\jb\logs")) { New-Item -ItemType Directory -Path "C:\jb\l
 if (Test-Path $LadyAceLog) { Remove-Item $LadyAceLog }
 
 try {
-    $destinationDrive = Get-DestinationDrive
+    $destinationDrive = Get-DestinationDrive -volumeId $TargetVolumeId
     $ladyAcePath = Join-Path -Path $destinationDrive -ChildPath $LadyAceFolderName
-    $externalPath = Join-Path -Path $destinationDrive -ChildPath $ExternalFolderName
     if (-not (Test-Path $ladyAcePath)) { New-Item -ItemType Directory -Path $ladyAcePath }
-    if (-not (Test-Path $externalPath)) { New-Item -ItemType Directory -Path $externalPath }
     if (-not (Test-Path $LocalLadyAce)) { New-Item -ItemType Directory -Path $LocalLadyAce }
 } catch {
     $global:failures += $_.Exception.Message
