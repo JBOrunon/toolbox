@@ -115,6 +115,7 @@ Each script writes a timestamped report under $HOME/jb.
 ### Windows — diagnostics
 
 - **PS-GetScreenLockStatus.ps1** — Reports whether the screen is locked and which user is logged in.
+- **PS-ExportEventLogs.ps1** — Exports Windows and PrintService event logs to .evtx files and compresses them into a ZIP archive.
 
 - **PS-GetSystemInfo.ps1** — Collects OS, hardware, disk, and basic network information into a report under C:\jb.
 - **PS-GetNetworkInfo.ps1** — Collects adapter, IP, DNS, route, wireless, and connectivity information into a report under C:\jb.
