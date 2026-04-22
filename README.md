@@ -135,6 +135,7 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-RemoveEmptyFolders.ps1** — Deletes empty immediate subfolders of a directory. Supports -WhatIf for a dry run.
 - **PS-RemoveNetworkProfiles.ps1** — Removes all Windows network connection profiles, resetting interface trust state (Public/Private/Domain). Does not remove saved Wi-Fi passwords.
 - **PS-RemoveRdpFiles.ps1** — Deletes all .rdp files from every user's Desktop. Supports -WhatIf for a dry run.
+- **PS-WindowsTimeFix.ps1** — Resets and reconfigures the Windows Time Service (w32tm) to sync from a specified NTP server (default: time.nist.gov).
 - **PS-ListFolders.ps1** — Lists subfolders of a directory into a deduplicated, sorted text file.
 
 ### Windows — setup
