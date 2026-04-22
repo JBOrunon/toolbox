@@ -133,6 +133,7 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-AddLocalAdmin.ps1** — Creates a local user account and adds it to the Administrators group.
 - **PS-RemoveEmptyFolders.ps1** — Deletes empty immediate subfolders of a directory. Supports -WhatIf for a dry run.
 - **PS-RemoveNetworkProfiles.ps1** — Removes all Windows network connection profiles, resetting interface trust state (Public/Private/Domain). Does not remove saved Wi-Fi passwords.
+- **PS-RemoveRdpFiles.ps1** — Deletes all .rdp files from every user's Desktop. Supports -WhatIf for a dry run.
 - **PS-ListFolders.ps1** — Lists subfolders of a directory into a deduplicated, sorted text file.
 
 ### Windows — setup
