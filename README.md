@@ -128,6 +128,7 @@ Each script writes a timestamped report under $HOME/jb.
 - **PS-ClearPrintSpooler.ps1** — Stops the Print Spooler, clears the queue, restarts the service. Fixes stuck print jobs.
 - **PS-CopyWithLog.ps1** — Copies a folder tree with progress bar and error log. Logs go to C:\jb\logs\.
 - **PS-DisableAdobeAI.ps1** — Disables Adobe Acrobat AI/Generative features via registry policy. Logs result to C:\jb\logs\.
+- **PS-KeywordSearch.ps1** — Recursively searches a folder for files containing keywords from a keyword list file. Writes matching paths and matched keywords to an output file.
 
 ### Windows — setup
 
